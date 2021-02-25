@@ -3,7 +3,7 @@ import warning from 'tiny-warning'
 import JSBI from 'jsbi'
 import { getAddress } from '@ethersproject/address'
 
-import { BigintIsh, ZERO, ONE, TWO, THREE, SolidityType, SOLIDITY_TYPE_MAXIMA } from './constants'
+import { BigintIsh, ZERO, ONE, TWO, THREE, SolidityType, SOLIDITY_TYPE_MAXIMA, ChainId, INIT_CODE_HASH_BSC, INIT_CODE_HASH } from './constants'
 
 export function validateSolidityTypeInstance(value: JSBI, solidityType: SolidityType): void {
   invariant(JSBI.greaterThanOrEqual(value, ZERO), `${value} is not a ${solidityType}.`)
@@ -78,5 +78,26 @@ export function sortedInsert<T>(items: T[], add: T, maxSize: number, comparator:
     }
     items.splice(lo, 0, add)
     return isFull ? items.pop()! : null
+  }
+}
+
+
+
+export const isBSC = (chainId: ChainId): boolean => {
+  switch (chainId) {
+    case ChainId.BSCMAINNET:
+      return true;
+    case ChainId.BSCTESTNET:
+      return true; 
+    default:
+      return false
+  }
+}
+
+export const getInitCodeHashByChainId = (chainId: ChainId): string => {
+  if(isBSC(chainId)){
+    return INIT_CODE_HASH_BSC
+  } else{
+    return INIT_CODE_HASH
   }
 }

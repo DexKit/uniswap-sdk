@@ -1,7 +1,7 @@
 import JSBI from 'jsbi'
 
-import { SolidityType } from '../constants'
-import { validateSolidityTypeInstance } from '../utils'
+import { SolidityType, ChainId } from '../constants'
+import { validateSolidityTypeInstance, isBSC } from '../utils'
 
 /**
  * A currency is any fungible financial instrument on Ethereum, including Ether and all ERC20 tokens.
@@ -12,11 +12,6 @@ export class Currency {
   public readonly decimals: number
   public readonly symbol?: string
   public readonly name?: string
-
-  /**
-   * The only instance of the base class `Currency`.
-   */
-  public static readonly ETHER: Currency = new Currency(18, 'ETH', 'Ether')
 
   /**
    * Constructs an instance of the base class `Currency`. The only instance of the base class `Currency` is `Currency.ETHER`.
@@ -31,7 +26,18 @@ export class Currency {
     this.symbol = symbol
     this.name = name
   }
+
+  public static getETHER(chainId: ChainId){
+    if(isBSC(chainId)){
+      return new Currency(18, 'BNB', 'Binance')
+    }
+    return  new Currency(18, 'ETH', 'Ether')
+  }
+  
+
+
+
 }
 
-const ETHER = Currency.ETHER
-export { ETHER }
+const GET_ETHER = Currency.getETHER;
+export {  GET_ETHER }
