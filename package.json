@@ -1,14 +1,14 @@
 {
-  "name": "@dexkit/sdk",
+  "name": "@uniswap/sdk",
   "license": "MIT",
-  "version": "1.0.0",
-  "description": "🛠 An SDK for building applications on top of Uniswap and PancakeSwap.",
+  "version": "3.0.3",
+  "description": "🛠 An SDK for building applications on top of Uniswap.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
     "dist"
   ],
-  "repository": "https://github.com/DexKit/uniswap-sdk.git",
+  "repository": "https://github.com/Uniswap/uniswap-sdk.git",
   "keywords": [
     "uniswap",
     "ethereum"
@@ -19,8 +19,6 @@
     "build": "tsdx build",
     "start": "tsdx watch",
     "test": "tsdx test",
-    "install": "tsdx build",
-    "prepare": "tsdx build",
     "prepublishOnly": "tsdx build"
   },
   "dependencies": {
