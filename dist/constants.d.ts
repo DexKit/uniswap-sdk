@@ -18,6 +18,7 @@ export declare enum Rounding {
     ROUND_HALF_UP = 1,
     ROUND_UP = 2
 }
+export declare const isBSC: (chainId: ChainId) => boolean;
 export declare const FACTORY_ADDRESS = "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f";
 export declare const FACTORY_ADDRESS_BSC = "0xBCfCcbde45cE874adCB698cC183deBcF17952812";
 export declare const GET_FACTORY_ADDRESS: (chainId: ChainId) => "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f" | "0xBCfCcbde45cE874adCB698cC183deBcF17952812";

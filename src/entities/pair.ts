@@ -15,9 +15,11 @@ import {
   _1000,
   ChainId,
   _998,
-  GET_FACTORY_ADDRESS
+  GET_FACTORY_ADDRESS,
+  isBSC,
+  GET_INIT_CODE_HASH
 } from '../constants'
-import { sqrt, parseBigintIsh, getInitCodeHashByChainId, isBSC } from '../utils'
+import { sqrt, parseBigintIsh,  } from '../utils'
 import { InsufficientReservesError, InsufficientInputAmountError } from '../errors'
 import { Token } from './token'
 
@@ -39,7 +41,7 @@ export class Pair {
           [tokens[1].address]: getCreate2Address(
             GET_FACTORY_ADDRESS(chainId),
             keccak256(['bytes'], [pack(['address', 'address'], [tokens[0].address, tokens[1].address])]),
-            getInitCodeHashByChainId(chainId)
+            GET_INIT_CODE_HASH(chainId)
           )
         }
       }

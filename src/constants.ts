@@ -1,5 +1,4 @@
 import JSBI from 'jsbi'
-import { isBSC } from 'utils'
 
 // exports for external consumption
 export type BigintIsh = JSBI | bigint | string
@@ -28,6 +27,16 @@ export enum Rounding {
   ROUND_UP
 }
 
+export const isBSC = (chainId: ChainId): boolean => {
+  switch (chainId) {
+    case ChainId.BSCMAINNET:
+      return true;
+    case ChainId.BSCTESTNET:
+      return true; 
+    default:
+      return false
+  }
+}
 
 export const FACTORY_ADDRESS = '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f'
 

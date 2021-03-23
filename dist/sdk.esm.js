@@ -1,6 +1,5 @@
 import JSBI from 'jsbi';
 export { default as JSBI } from 'jsbi';
-import { isBSC as isBSC$1 } from 'utils';
 import invariant from 'tiny-invariant';
 import warning from 'tiny-warning';
 import { getAddress, getCreate2Address } from '@ethersproject/address';
@@ -43,6 +42,18 @@ var Rounding;
   Rounding[Rounding["ROUND_UP"] = 2] = "ROUND_UP";
 })(Rounding || (Rounding = {}));
 
+var isBSC = function isBSC(chainId) {
+  switch (chainId) {
+    case ChainId.BSCMAINNET:
+      return true;
+
+    case ChainId.BSCTESTNET:
+      return true;
+
+    default:
+      return false;
+  }
+};
 var FACTORY_ADDRESS = '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f';
 var FACTORY_ADDRESS_BSC = '0xBCfCcbde45cE874adCB698cC183deBcF17952812';
 /*export const FACTORY_ADDRESS_AVAX: { [chainId: number]: string } = {
@@ -51,10 +62,17 @@ var FACTORY_ADDRESS_BSC = '0xBCfCcbde45cE874adCB698cC183deBcF17952812';
 }*/
 
 var GET_FACTORY_ADDRESS = function GET_FACTORY_ADDRESS(chainId) {
-  if (isBSC$1(chainId)) {
+  if (isBSC(chainId)) {
     return FACTORY_ADDRESS_BSC;
   } else {
     return FACTORY_ADDRESS;
+  }
+};
+var GET_INIT_CODE_HASH = function GET_INIT_CODE_HASH(chainId) {
+  if (isBSC(chainId)) {
+    return INIT_CODE_HASH_BSC;
+  } else {
+    return INIT_CODE_HASH;
   }
 };
 var INIT_CODE_HASH = '0x96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7da348845f';
@@ -368,18 +386,6 @@ function sortedInsert(items, add, maxSize, comparator) {
     return isFull ? items.pop() : null;
   }
 }
-var isBSC = function isBSC(chainId) {
-  switch (chainId) {
-    case ChainId.BSCMAINNET:
-      return true;
-
-    case ChainId.BSCTESTNET:
-      return true;
-
-    default:
-      return false;
-  }
-};
 /*export const isAvax = (chainId: ChainId): boolean => {
   switch (chainId) {
     case ChainId.AVALANCHE:
@@ -390,14 +396,6 @@ var isBSC = function isBSC(chainId) {
       return false
   }
 }*/
-
-var getInitCodeHashByChainId = function getInitCodeHashByChainId(chainId) {
-  if (isBSC(chainId)) {
-    return INIT_CODE_HASH_BSC;
-  } else {
-    return INIT_CODE_HASH;
-  }
-};
 
 /**
  * A currency is any fungible financial instrument on Ethereum, including Ether and all ERC20 tokens.
@@ -832,7 +830,7 @@ var Pair = /*#__PURE__*/function () {
     if (((_PAIR_ADDRESS_CACHE = PAIR_ADDRESS_CACHE) === null || _PAIR_ADDRESS_CACHE === void 0 ? void 0 : (_PAIR_ADDRESS_CACHE$t = _PAIR_ADDRESS_CACHE[tokens[0].address]) === null || _PAIR_ADDRESS_CACHE$t === void 0 ? void 0 : _PAIR_ADDRESS_CACHE$t[tokens[1].address]) === undefined) {
       var _PAIR_ADDRESS_CACHE2, _extends2, _extends3;
 
-      PAIR_ADDRESS_CACHE = _extends({}, PAIR_ADDRESS_CACHE, (_extends3 = {}, _extends3[tokens[0].address] = _extends({}, (_PAIR_ADDRESS_CACHE2 = PAIR_ADDRESS_CACHE) === null || _PAIR_ADDRESS_CACHE2 === void 0 ? void 0 : _PAIR_ADDRESS_CACHE2[tokens[0].address], (_extends2 = {}, _extends2[tokens[1].address] = getCreate2Address(GET_FACTORY_ADDRESS(chainId), keccak256(['bytes'], [pack(['address', 'address'], [tokens[0].address, tokens[1].address])]), getInitCodeHashByChainId(chainId)), _extends2)), _extends3));
+      PAIR_ADDRESS_CACHE = _extends({}, PAIR_ADDRESS_CACHE, (_extends3 = {}, _extends3[tokens[0].address] = _extends({}, (_PAIR_ADDRESS_CACHE2 = PAIR_ADDRESS_CACHE) === null || _PAIR_ADDRESS_CACHE2 === void 0 ? void 0 : _PAIR_ADDRESS_CACHE2[tokens[0].address], (_extends2 = {}, _extends2[tokens[1].address] = getCreate2Address(GET_FACTORY_ADDRESS(chainId), keccak256(['bytes'], [pack(['address', 'address'], [tokens[0].address, tokens[1].address])]), GET_INIT_CODE_HASH(chainId)), _extends2)), _extends3));
     }
 
     return PAIR_ADDRESS_CACHE[tokens[0].address][tokens[1].address];
@@ -1632,5 +1630,5 @@ var Fetcher = /*#__PURE__*/function () {
   return Fetcher;
 }();
 
-export { ChainId, Currency, CurrencyAmount, FACTORY_ADDRESS, FACTORY_ADDRESS_BSC, Fetcher, Fraction, GET_ETHER, INIT_CODE_HASH, INIT_CODE_HASH_BSC, InsufficientInputAmountError, InsufficientReservesError, MINIMUM_LIQUIDITY, Pair, Percent, Price, Rounding, Route, Router, Token, TokenAmount, Trade, TradeType, WETH, currencyEquals, inputOutputComparator, isBSC, tradeComparator };
+export { ChainId, Currency, CurrencyAmount, FACTORY_ADDRESS, FACTORY_ADDRESS_BSC, Fetcher, Fraction, GET_ETHER, GET_FACTORY_ADDRESS, GET_INIT_CODE_HASH, INIT_CODE_HASH, INIT_CODE_HASH_BSC, InsufficientInputAmountError, InsufficientReservesError, MINIMUM_LIQUIDITY, Pair, Percent, Price, Rounding, Route, Router, Token, TokenAmount, Trade, TradeType, WETH, currencyEquals, inputOutputComparator, isBSC, tradeComparator };
 //# sourceMappingURL=sdk.esm.js.map
