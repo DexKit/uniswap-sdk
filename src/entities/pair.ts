@@ -7,7 +7,6 @@ import { getCreate2Address } from '@ethersproject/address'
 
 import {
   BigintIsh,
-  FACTORY_ADDRESS,
   MINIMUM_LIQUIDITY,
   ZERO,
   ONE,
@@ -15,7 +14,8 @@ import {
   _997,
   _1000,
   ChainId,
-  _998
+  _998,
+  GET_FACTORY_ADDRESS
 } from '../constants'
 import { sqrt, parseBigintIsh, getInitCodeHashByChainId, isBSC } from '../utils'
 import { InsufficientReservesError, InsufficientInputAmountError } from '../errors'
@@ -37,7 +37,7 @@ export class Pair {
         [tokens[0].address]: {
           ...PAIR_ADDRESS_CACHE?.[tokens[0].address],
           [tokens[1].address]: getCreate2Address(
-            FACTORY_ADDRESS,
+            GET_FACTORY_ADDRESS(chainId),
             keccak256(['bytes'], [pack(['address', 'address'], [tokens[0].address, tokens[1].address])]),
             getInitCodeHashByChainId(chainId)
           )

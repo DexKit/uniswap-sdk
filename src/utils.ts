@@ -94,6 +94,17 @@ export const isBSC = (chainId: ChainId): boolean => {
   }
 }
 
+/*export const isAvax = (chainId: ChainId): boolean => {
+  switch (chainId) {
+    case ChainId.AVALANCHE:
+      return true;
+    case ChainId.FUJI:
+      return true; 
+    default:
+      return false
+  }
+}*/
+
 export const getInitCodeHashByChainId = (chainId: ChainId): string => {
   if(isBSC(chainId)){
     return INIT_CODE_HASH_BSC

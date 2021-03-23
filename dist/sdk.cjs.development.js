@@ -5,7 +5,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 var JSBI = _interopDefault(require('jsbi'));
-require('utils');
+var utils = require('utils');
 var invariant = _interopDefault(require('tiny-invariant'));
 var warning = _interopDefault(require('tiny-warning'));
 var address = require('@ethersproject/address');
@@ -27,7 +27,9 @@ var _SOLIDITY_TYPE_MAXIMA;
   ChainId[ChainId["G\xD6RLI"] = 5] = "G\xD6RLI";
   ChainId[ChainId["KOVAN"] = 42] = "KOVAN";
   ChainId[ChainId["BSCMAINNET"] = 56] = "BSCMAINNET";
-  ChainId[ChainId["BSCTESTNET"] = 97] = "BSCTESTNET";
+  ChainId[ChainId["BSCTESTNET"] = 97] = "BSCTESTNET"; // Comment this for now
+  // FUJI = 43113,
+  // AVALANCHE = 43114
 })(exports.ChainId || (exports.ChainId = {}));
 
 (function (TradeType) {
@@ -43,6 +45,18 @@ var _SOLIDITY_TYPE_MAXIMA;
 
 var FACTORY_ADDRESS = '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f';
 var FACTORY_ADDRESS_BSC = '0xBCfCcbde45cE874adCB698cC183deBcF17952812';
+/*export const FACTORY_ADDRESS_AVAX: { [chainId: number]: string } = {
+  [ChainId.FUJI]: '0xE4A575550C2b460d2307b82dCd7aFe84AD1484dd',
+  [ChainId.AVALANCHE]: '0xefa94DE7a4656D787667C749f7E1223D71E9FD88'
+}*/
+
+var GET_FACTORY_ADDRESS = function GET_FACTORY_ADDRESS(chainId) {
+  if (utils.isBSC(chainId)) {
+    return FACTORY_ADDRESS_BSC;
+  } else {
+    return FACTORY_ADDRESS;
+  }
+};
 var INIT_CODE_HASH = '0x96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7da348845f';
 var INIT_CODE_HASH_BSC = '0xd0d4c4cd0848c93cb4fd1f498d7013ee6bfb25783ea21593d5834f5d250ece66';
 var MINIMUM_LIQUIDITY = /*#__PURE__*/JSBI.BigInt(1000); // exports for internal consumption
@@ -366,6 +380,17 @@ var isBSC = function isBSC(chainId) {
       return false;
   }
 };
+/*export const isAvax = (chainId: ChainId): boolean => {
+  switch (chainId) {
+    case ChainId.AVALANCHE:
+      return true;
+    case ChainId.FUJI:
+      return true;
+    default:
+      return false
+  }
+}*/
+
 var getInitCodeHashByChainId = function getInitCodeHashByChainId(chainId) {
   if (isBSC(chainId)) {
     return INIT_CODE_HASH_BSC;
@@ -807,7 +832,7 @@ var Pair = /*#__PURE__*/function () {
     if (((_PAIR_ADDRESS_CACHE = PAIR_ADDRESS_CACHE) === null || _PAIR_ADDRESS_CACHE === void 0 ? void 0 : (_PAIR_ADDRESS_CACHE$t = _PAIR_ADDRESS_CACHE[tokens[0].address]) === null || _PAIR_ADDRESS_CACHE$t === void 0 ? void 0 : _PAIR_ADDRESS_CACHE$t[tokens[1].address]) === undefined) {
       var _PAIR_ADDRESS_CACHE2, _extends2, _extends3;
 
-      PAIR_ADDRESS_CACHE = _extends({}, PAIR_ADDRESS_CACHE, (_extends3 = {}, _extends3[tokens[0].address] = _extends({}, (_PAIR_ADDRESS_CACHE2 = PAIR_ADDRESS_CACHE) === null || _PAIR_ADDRESS_CACHE2 === void 0 ? void 0 : _PAIR_ADDRESS_CACHE2[tokens[0].address], (_extends2 = {}, _extends2[tokens[1].address] = address.getCreate2Address(FACTORY_ADDRESS, solidity.keccak256(['bytes'], [solidity.pack(['address', 'address'], [tokens[0].address, tokens[1].address])]), getInitCodeHashByChainId(chainId)), _extends2)), _extends3));
+      PAIR_ADDRESS_CACHE = _extends({}, PAIR_ADDRESS_CACHE, (_extends3 = {}, _extends3[tokens[0].address] = _extends({}, (_PAIR_ADDRESS_CACHE2 = PAIR_ADDRESS_CACHE) === null || _PAIR_ADDRESS_CACHE2 === void 0 ? void 0 : _PAIR_ADDRESS_CACHE2[tokens[0].address], (_extends2 = {}, _extends2[tokens[1].address] = address.getCreate2Address(GET_FACTORY_ADDRESS(chainId), solidity.keccak256(['bytes'], [solidity.pack(['address', 'address'], [tokens[0].address, tokens[1].address])]), getInitCodeHashByChainId(chainId)), _extends2)), _extends3));
     }
 
     return PAIR_ADDRESS_CACHE[tokens[0].address][tokens[1].address];
