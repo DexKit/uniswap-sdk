@@ -39,8 +39,8 @@ export const isBSC = (chainId: ChainId): boolean => {
 }
 
 export const FACTORY_ADDRESS = '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f'
-
-export const FACTORY_ADDRESS_BSC = '0xBCfCcbde45cE874adCB698cC183deBcF17952812'
+// Pancakeswap v2
+export const FACTORY_ADDRESS_BSC = '0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73'
 
 /*export const FACTORY_ADDRESS_AVAX: { [chainId: number]: string } = {
   [ChainId.FUJI]: '0xE4A575550C2b460d2307b82dCd7aFe84AD1484dd',
@@ -65,8 +65,8 @@ export const GET_INIT_CODE_HASH = (chainId: ChainId) => {
 
 
 export const INIT_CODE_HASH = '0x96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7da348845f'
-
-export const INIT_CODE_HASH_BSC = '0xd0d4c4cd0848c93cb4fd1f498d7013ee6bfb25783ea21593d5834f5d250ece66'
+// Pancakeswap v2
+export const INIT_CODE_HASH_BSC = '0x00fb7f630766e6a796048ea87d01acd3068e8ff67d078148a3fa3f4a84f69bd5'
 
 export const INIT_CODE_AVAX = '0x40231f6b438bce0797c9ada29b718a87ea0a5cea3fe9a771abdd76bd41a3e545'
 
@@ -84,6 +84,9 @@ export const _100 = JSBI.BigInt(100)
 export const _997 = JSBI.BigInt(997)
 export const _998 = JSBI.BigInt(997)
 export const _1000 = JSBI.BigInt(1000)
+export const FEES_NUMERATOR = JSBI.BigInt(9975)
+export const FEES_DENOMINATOR = JSBI.BigInt(10000)
+
 
 export enum SolidityType {
   uint8 = 'uint8',
