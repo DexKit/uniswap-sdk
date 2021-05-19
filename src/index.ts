@@ -12,6 +12,7 @@ export {
   INIT_CODE_HASH_BSC,
   MINIMUM_LIQUIDITY,
   isBSC,
+  isMATIC,
   GET_FACTORY_ADDRESS,
   GET_INIT_CODE_HASH,
 } from './constants'

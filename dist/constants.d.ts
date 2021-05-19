@@ -7,7 +7,8 @@ export declare enum ChainId {
     GÖRLI = 5,
     KOVAN = 42,
     BSCMAINNET = 56,
-    BSCTESTNET = 97
+    BSCTESTNET = 97,
+    MATICMAINNET = 137
 }
 export declare enum TradeType {
     EXACT_INPUT = 0,
@@ -19,6 +20,7 @@ export declare enum Rounding {
     ROUND_UP = 2
 }
 export declare const isBSC: (chainId: ChainId) => boolean;
+export declare const isMATIC: (chainId: ChainId) => boolean;
 export declare const FACTORY_ADDRESS = "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f";
 export declare const FACTORY_ADDRESS_BSC = "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73";
 export declare const GET_FACTORY_ADDRESS: (chainId: ChainId) => "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f" | "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73";

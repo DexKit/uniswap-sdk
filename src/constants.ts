@@ -11,6 +11,7 @@ export enum ChainId {
   KOVAN = 42,
   BSCMAINNET = 56,
   BSCTESTNET = 97,
+  MATICMAINNET = 137,  
   // Comment this for now
  // FUJI = 43113,
  // AVALANCHE = 43114
@@ -33,6 +34,15 @@ export const isBSC = (chainId: ChainId): boolean => {
       return true;
     case ChainId.BSCTESTNET:
       return true; 
+    default:
+      return false
+  }
+}
+
+export const isMATIC = (chainId: ChainId): boolean => {
+  switch (chainId) {
+    case ChainId.MATICMAINNET:
+      return true;
     default:
       return false
   }
