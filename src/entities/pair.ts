@@ -132,8 +132,10 @@ export class Pair {
     }
     const inputReserve = this.reserveOf(inputAmount.token)
     const outputReserve = this.reserveOf(inputAmount.token.equals(this.token0) ? this.token1 : this.token0)
+    // Uniswap V2 and Matic is 997
     const inputAmountWithFee = JSBI.multiply(inputAmount.raw, isBSC(this.chainId) ? FEES_NUMERATOR : _997)
     const numerator = JSBI.multiply(inputAmountWithFee, outputReserve.raw)
+     // Uniswap V2 and Matic is 1000
     const denominator = JSBI.add(JSBI.multiply(inputReserve.raw, isBSC(this.chainId) ? FEES_DENOMINATOR : _1000), inputAmountWithFee)
     const outputAmount = new TokenAmount(
       inputAmount.token.equals(this.token0) ? this.token1 : this.token0,
