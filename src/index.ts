@@ -13,6 +13,7 @@ export {
   MINIMUM_LIQUIDITY,
   isBSC,
   isMATIC,
+  isAVAX,
   GET_FACTORY_ADDRESS,
   GET_INIT_CODE_HASH,
 } from './constants'

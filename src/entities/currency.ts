@@ -1,6 +1,6 @@
 import JSBI from 'jsbi'
 
-import { SolidityType, ChainId, isBSC, isMATIC } from '../constants'
+import { SolidityType, ChainId, isBSC, isMATIC, isAVAX } from '../constants'
 import { validateSolidityTypeInstance } from '../utils'
 
 /**
@@ -27,20 +27,19 @@ export class Currency {
     this.name = name
   }
 
-  public static getETHER(chainId: ChainId){
-    if(isBSC(chainId)){
+  public static getETHER(chainId: ChainId) {
+    if (isBSC(chainId)) {
       return new Currency(18, 'BNB', 'Binance')
-    } 
-    if(isMATIC(chainId)){
+    }
+    if (isMATIC(chainId)) {
       return new Currency(18, 'MATIC', 'Polygon')
     }
-    return  new Currency(18, 'ETH', 'Ether')
+    if (isAVAX(chainId)) {
+      return new Currency(18, 'AVAX', 'Avalanche')
+    }
+    return new Currency(18, 'ETH', 'Ether')
   }
-  
-
-
-
 }
 
-const GET_ETHER = Currency.getETHER;
-export {  GET_ETHER }
+const GET_ETHER = Currency.getETHER
+export { GET_ETHER }

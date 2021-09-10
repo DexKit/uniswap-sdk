@@ -13,8 +13,8 @@ export enum ChainId {
   BSCTESTNET = 97,
   MATICMAINNET = 137,  
   // Comment this for now
- // FUJI = 43113,
- // AVALANCHE = 43114
+  // FUJI = 43113,
+  AVALANCHE = 43114
 }
 
 export enum TradeType {
@@ -48,16 +48,26 @@ export const isMATIC = (chainId: ChainId): boolean => {
   }
 }
 
+export const isAVAX = (chainId: ChainId): boolean => {
+  switch (chainId) {
+    case ChainId.AVALANCHE:
+      return true;
+    default:
+      return false
+  }
+}
+
 export const FACTORY_ADDRESS = '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f'
 // Pancakeswap v2
 export const FACTORY_ADDRESS_BSC = '0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73'
 
 
 export const FACTORY_ADDRESS_MATIC = '0x5757371414417b8C6CAad45bAeF941aBc7d3Ab32'
-/*export const FACTORY_ADDRESS_AVAX: { [chainId: number]: string } = {
-  [ChainId.FUJI]: '0xE4A575550C2b460d2307b82dCd7aFe84AD1484dd',
+
+export const FACTORY_ADDRESS_AVAX: { [chainId: number]: string } = {
+ // [ChainId.FUJI]: '0xE4A575550C2b460d2307b82dCd7aFe84AD1484dd',
   [ChainId.AVALANCHE]: '0xefa94DE7a4656D787667C749f7E1223D71E9FD88'
-}*/
+}
 
 export const GET_FACTORY_ADDRESS = (chainId: ChainId) => {
   if(isBSC(chainId)){
@@ -66,6 +76,11 @@ export const GET_FACTORY_ADDRESS = (chainId: ChainId) => {
   if(isMATIC(chainId)){
     return FACTORY_ADDRESS_MATIC
   }
+  if(isAVAX(chainId)){
+    return FACTORY_ADDRESS_AVAX[ChainId.AVALANCHE]
+  }
+
+
   return FACTORY_ADDRESS
   
 }
@@ -87,6 +102,10 @@ export const GET_INIT_CODE_HASH = (chainId: ChainId) => {
   if(isMATIC(chainId)){
     return INIT_CODE_HASH_MATIC
   }
+  if(isAVAX(chainId)){
+    return INIT_CODE_AVAX 
+  }
+
   return  INIT_CODE_HASH 
 
 }
