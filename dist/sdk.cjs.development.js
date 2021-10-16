@@ -17,7 +17,7 @@ var networks = require('@ethersproject/networks');
 var providers = require('@ethersproject/providers');
 var IUniswapV2Pair = _interopDefault(require('@uniswap/v2-core/build/IUniswapV2Pair.json'));
 
-var _SOLIDITY_TYPE_MAXIMA;
+var _FACTORY_ADDRESS_AVAX, _SOLIDITY_TYPE_MAXIMA;
 
 (function (ChainId) {
   ChainId[ChainId["MAINNET"] = 1] = "MAINNET";
@@ -29,7 +29,8 @@ var _SOLIDITY_TYPE_MAXIMA;
   ChainId[ChainId["BSCTESTNET"] = 97] = "BSCTESTNET";
   ChainId[ChainId["MATICMAINNET"] = 137] = "MATICMAINNET"; // Comment this for now
   // FUJI = 43113,
-  // AVALANCHE = 43114
+
+  ChainId[ChainId["AVALANCHE"] = 43114] = "AVALANCHE";
 })(exports.ChainId || (exports.ChainId = {}));
 
 (function (TradeType) {
@@ -64,15 +65,20 @@ var isMATIC = function isMATIC(chainId) {
       return false;
   }
 };
+var isAVAX = function isAVAX(chainId) {
+  switch (chainId) {
+    case exports.ChainId.AVALANCHE:
+      return true;
+
+    default:
+      return false;
+  }
+};
 var FACTORY_ADDRESS = '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f'; // Pancakeswap v2
 
 var FACTORY_ADDRESS_BSC = '0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73';
 var FACTORY_ADDRESS_MATIC = '0x5757371414417b8C6CAad45bAeF941aBc7d3Ab32';
-/*export const FACTORY_ADDRESS_AVAX: { [chainId: number]: string } = {
-  [ChainId.FUJI]: '0xE4A575550C2b460d2307b82dCd7aFe84AD1484dd',
-  [ChainId.AVALANCHE]: '0xefa94DE7a4656D787667C749f7E1223D71E9FD88'
-}*/
-
+var FACTORY_ADDRESS_AVAX = (_FACTORY_ADDRESS_AVAX = {}, _FACTORY_ADDRESS_AVAX[exports.ChainId.AVALANCHE] = '0xefa94DE7a4656D787667C749f7E1223D71E9FD88', _FACTORY_ADDRESS_AVAX);
 var GET_FACTORY_ADDRESS = function GET_FACTORY_ADDRESS(chainId) {
   if (isBSC(chainId)) {
     return FACTORY_ADDRESS_BSC;
@@ -82,6 +88,10 @@ var GET_FACTORY_ADDRESS = function GET_FACTORY_ADDRESS(chainId) {
     return FACTORY_ADDRESS_MATIC;
   }
 
+  if (isAVAX(chainId)) {
+    return FACTORY_ADDRESS_AVAX[exports.ChainId.AVALANCHE];
+  }
+
   return FACTORY_ADDRESS;
 };
 var INIT_CODE_HASH = '0x96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7da348845f'; // Pancakeswap v2
@@ -89,6 +99,7 @@ var INIT_CODE_HASH = '0x96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7d
 var INIT_CODE_HASH_BSC = '0x00fb7f630766e6a796048ea87d01acd3068e8ff67d078148a3fa3f4a84f69bd5'; // QuickSwap from: https://github.com/QuickSwap/QuickSwap-sdk
 
 var INIT_CODE_HASH_MATIC = '0x96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7da348845f';
+var INIT_CODE_AVAX = '0x40231f6b438bce0797c9ada29b718a87ea0a5cea3fe9a771abdd76bd41a3e545';
 var GET_INIT_CODE_HASH = function GET_INIT_CODE_HASH(chainId) {
   if (isBSC(chainId)) {
     return INIT_CODE_HASH_BSC;
@@ -96,6 +107,10 @@ var GET_INIT_CODE_HASH = function GET_INIT_CODE_HASH(chainId) {
 
   if (isMATIC(chainId)) {
     return INIT_CODE_HASH_MATIC;
+  }
+
+  if (isAVAX(chainId)) {
+    return INIT_CODE_AVAX;
   }
 
   return INIT_CODE_HASH;
@@ -450,6 +465,10 @@ var Currency = /*#__PURE__*/function () {
       return new Currency(18, 'MATIC', 'Polygon');
     }
 
+    if (isAVAX(chainId)) {
+      return new Currency(18, 'AVAX', 'Avalanche');
+    }
+
     return new Currency(18, 'ETH', 'Ether');
   };
 
@@ -520,7 +539,7 @@ function currencyEquals(currencyA, currencyB) {
     return currencyA === currencyB;
   }
 }
-var WETH = (_WETH = {}, _WETH[exports.ChainId.MAINNET] = /*#__PURE__*/new Token(exports.ChainId.MAINNET, '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2', 18, 'WETH', 'Wrapped Ether'), _WETH[exports.ChainId.ROPSTEN] = /*#__PURE__*/new Token(exports.ChainId.ROPSTEN, '0xc778417E063141139Fce010982780140Aa0cD5Ab', 18, 'WETH', 'Wrapped Ether'), _WETH[exports.ChainId.RINKEBY] = /*#__PURE__*/new Token(exports.ChainId.RINKEBY, '0xc778417E063141139Fce010982780140Aa0cD5Ab', 18, 'WETH', 'Wrapped Ether'), _WETH[exports.ChainId.GÖRLI] = /*#__PURE__*/new Token(exports.ChainId.GÖRLI, '0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6', 18, 'WETH', 'Wrapped Ether'), _WETH[exports.ChainId.KOVAN] = /*#__PURE__*/new Token(exports.ChainId.KOVAN, '0xd0A1E359811322d97991E03f863a0C30C2cF029C', 18, 'WETH', 'Wrapped Ether'), _WETH[exports.ChainId.BSCMAINNET] = /*#__PURE__*/new Token(exports.ChainId.BSCMAINNET, '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c', 18, 'WBNB', 'Wrapped BNB'), _WETH[exports.ChainId.BSCTESTNET] = /*#__PURE__*/new Token(exports.ChainId.BSCTESTNET, '0xaE8E19eFB41e7b96815649A6a60785e1fbA84C1e', 18, 'WBNB', 'Wrapped BNB'), _WETH[exports.ChainId.MATICMAINNET] = /*#__PURE__*/new Token(exports.ChainId.MATICMAINNET, '0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270', 18, 'WMATIC', 'Wrapped Matic'), _WETH);
+var WETH = (_WETH = {}, _WETH[exports.ChainId.MAINNET] = /*#__PURE__*/new Token(exports.ChainId.MAINNET, '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2', 18, 'WETH', 'Wrapped Ether'), _WETH[exports.ChainId.ROPSTEN] = /*#__PURE__*/new Token(exports.ChainId.ROPSTEN, '0xc778417E063141139Fce010982780140Aa0cD5Ab', 18, 'WETH', 'Wrapped Ether'), _WETH[exports.ChainId.RINKEBY] = /*#__PURE__*/new Token(exports.ChainId.RINKEBY, '0xc778417E063141139Fce010982780140Aa0cD5Ab', 18, 'WETH', 'Wrapped Ether'), _WETH[exports.ChainId.GÖRLI] = /*#__PURE__*/new Token(exports.ChainId.GÖRLI, '0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6', 18, 'WETH', 'Wrapped Ether'), _WETH[exports.ChainId.KOVAN] = /*#__PURE__*/new Token(exports.ChainId.KOVAN, '0xd0A1E359811322d97991E03f863a0C30C2cF029C', 18, 'WETH', 'Wrapped Ether'), _WETH[exports.ChainId.BSCMAINNET] = /*#__PURE__*/new Token(exports.ChainId.BSCMAINNET, '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c', 18, 'WBNB', 'Wrapped BNB'), _WETH[exports.ChainId.BSCTESTNET] = /*#__PURE__*/new Token(exports.ChainId.BSCTESTNET, '0xaE8E19eFB41e7b96815649A6a60785e1fbA84C1e', 18, 'WBNB', 'Wrapped BNB'), _WETH[exports.ChainId.MATICMAINNET] = /*#__PURE__*/new Token(exports.ChainId.MATICMAINNET, '0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270', 18, 'WMATIC', 'Wrapped Matic'), _WETH[exports.ChainId.AVALANCHE] = /*#__PURE__*/new Token(exports.ChainId.AVALANCHE, '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7', 18, 'WAVAX', 'Wrapped Avax'), _WETH);
 
 var _toSignificantRoundin, _toFixedRounding;
 var Decimal = /*#__PURE__*/toFormat(_Decimal);
@@ -1686,6 +1705,7 @@ exports.Trade = Trade;
 exports.WETH = WETH;
 exports.currencyEquals = currencyEquals;
 exports.inputOutputComparator = inputOutputComparator;
+exports.isAVAX = isAVAX;
 exports.isBSC = isBSC;
 exports.isMATIC = isMATIC;
 exports.tradeComparator = tradeComparator;

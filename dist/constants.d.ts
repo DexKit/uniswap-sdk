@@ -8,7 +8,8 @@ export declare enum ChainId {
     KOVAN = 42,
     BSCMAINNET = 56,
     BSCTESTNET = 97,
-    MATICMAINNET = 137
+    MATICMAINNET = 137,
+    AVALANCHE = 43114
 }
 export declare enum TradeType {
     EXACT_INPUT = 0,
@@ -21,15 +22,19 @@ export declare enum Rounding {
 }
 export declare const isBSC: (chainId: ChainId) => boolean;
 export declare const isMATIC: (chainId: ChainId) => boolean;
+export declare const isAVAX: (chainId: ChainId) => boolean;
 export declare const FACTORY_ADDRESS = "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f";
 export declare const FACTORY_ADDRESS_BSC = "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73";
 export declare const FACTORY_ADDRESS_MATIC = "0x5757371414417b8C6CAad45bAeF941aBc7d3Ab32";
-export declare const GET_FACTORY_ADDRESS: (chainId: ChainId) => "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f" | "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73" | "0x5757371414417b8C6CAad45bAeF941aBc7d3Ab32";
+export declare const FACTORY_ADDRESS_AVAX: {
+    [chainId: number]: string;
+};
+export declare const GET_FACTORY_ADDRESS: (chainId: ChainId) => string;
 export declare const INIT_CODE_HASH = "0x96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7da348845f";
 export declare const INIT_CODE_HASH_BSC = "0x00fb7f630766e6a796048ea87d01acd3068e8ff67d078148a3fa3f4a84f69bd5";
 export declare const INIT_CODE_HASH_MATIC = "0x96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7da348845f";
 export declare const INIT_CODE_AVAX = "0x40231f6b438bce0797c9ada29b718a87ea0a5cea3fe9a771abdd76bd41a3e545";
-export declare const GET_INIT_CODE_HASH: (chainId: ChainId) => "0x96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7da348845f" | "0x00fb7f630766e6a796048ea87d01acd3068e8ff67d078148a3fa3f4a84f69bd5";
+export declare const GET_INIT_CODE_HASH: (chainId: ChainId) => "0x96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7da348845f" | "0x00fb7f630766e6a796048ea87d01acd3068e8ff67d078148a3fa3f4a84f69bd5" | "0x40231f6b438bce0797c9ada29b718a87ea0a5cea3fe9a771abdd76bd41a3e545";
 export declare const MINIMUM_LIQUIDITY: JSBI;
 export declare const ZERO: JSBI;
 export declare const ONE: JSBI;
