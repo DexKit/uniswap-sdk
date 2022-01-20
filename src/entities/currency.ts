@@ -1,6 +1,6 @@
 import JSBI from 'jsbi'
 
-import { SolidityType, ChainId, isBSC, isMATIC, isAVAX } from '../constants'
+import { SolidityType, ChainId, isBSC, isMATIC, isAVAX, isFantom, isArbitrum } from '../constants'
 import { validateSolidityTypeInstance } from '../utils'
 
 /**
@@ -36,6 +36,13 @@ export class Currency {
     }
     if (isAVAX(chainId)) {
       return new Currency(18, 'AVAX', 'Avalanche')
+    }
+    if (isFantom(chainId)) {
+      return new Currency(18, 'FTM', 'Fantom')
+    }
+
+    if (isArbitrum(chainId)) {
+      return new Currency(18, 'ETH', 'Ether')
     }
     return new Currency(18, 'ETH', 'Ether')
   }

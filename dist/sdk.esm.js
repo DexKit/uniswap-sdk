@@ -23,10 +23,13 @@ var ChainId;
   ChainId[ChainId["KOVAN"] = 42] = "KOVAN";
   ChainId[ChainId["BSCMAINNET"] = 56] = "BSCMAINNET";
   ChainId[ChainId["BSCTESTNET"] = 97] = "BSCTESTNET";
-  ChainId[ChainId["MATICMAINNET"] = 137] = "MATICMAINNET"; // Comment this for now
+  ChainId[ChainId["MATICMAINNET"] = 137] = "MATICMAINNET";
+  ChainId[ChainId["FANTOM"] = 250] = "FANTOM"; // Comment this for now
   // FUJI = 43113,
 
   ChainId[ChainId["AVALANCHE"] = 43114] = "AVALANCHE";
+  ChainId[ChainId["CELO"] = 42220] = "CELO";
+  ChainId[ChainId["ARBITRUM"] = 42161] = "ARBITRUM";
 })(ChainId || (ChainId = {}));
 
 var TradeType;
@@ -68,6 +71,33 @@ var isMATIC = function isMATIC(chainId) {
 var isAVAX = function isAVAX(chainId) {
   switch (chainId) {
     case ChainId.AVALANCHE:
+      return true;
+
+    default:
+      return false;
+  }
+};
+var isFantom = function isFantom(chainId) {
+  switch (chainId) {
+    case ChainId.FANTOM:
+      return true;
+
+    default:
+      return false;
+  }
+};
+var isCelo = function isCelo(chainId) {
+  switch (chainId) {
+    case ChainId.CELO:
+      return true;
+
+    default:
+      return false;
+  }
+};
+var isArbitrum = function isArbitrum(chainId) {
+  switch (chainId) {
+    case ChainId.ARBITRUM:
       return true;
 
     default:
@@ -469,6 +499,14 @@ var Currency = /*#__PURE__*/function () {
       return new Currency(18, 'AVAX', 'Avalanche');
     }
 
+    if (isFantom(chainId)) {
+      return new Currency(18, 'FTM', 'Fantom');
+    }
+
+    if (isArbitrum(chainId)) {
+      return new Currency(18, 'ETH', 'Ether');
+    }
+
     return new Currency(18, 'ETH', 'Ether');
   };
 
@@ -539,7 +577,7 @@ function currencyEquals(currencyA, currencyB) {
     return currencyA === currencyB;
   }
 }
-var WETH = (_WETH = {}, _WETH[ChainId.MAINNET] = /*#__PURE__*/new Token(ChainId.MAINNET, '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2', 18, 'WETH', 'Wrapped Ether'), _WETH[ChainId.ROPSTEN] = /*#__PURE__*/new Token(ChainId.ROPSTEN, '0xc778417E063141139Fce010982780140Aa0cD5Ab', 18, 'WETH', 'Wrapped Ether'), _WETH[ChainId.RINKEBY] = /*#__PURE__*/new Token(ChainId.RINKEBY, '0xc778417E063141139Fce010982780140Aa0cD5Ab', 18, 'WETH', 'Wrapped Ether'), _WETH[ChainId.GÖRLI] = /*#__PURE__*/new Token(ChainId.GÖRLI, '0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6', 18, 'WETH', 'Wrapped Ether'), _WETH[ChainId.KOVAN] = /*#__PURE__*/new Token(ChainId.KOVAN, '0xd0A1E359811322d97991E03f863a0C30C2cF029C', 18, 'WETH', 'Wrapped Ether'), _WETH[ChainId.BSCMAINNET] = /*#__PURE__*/new Token(ChainId.BSCMAINNET, '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c', 18, 'WBNB', 'Wrapped BNB'), _WETH[ChainId.BSCTESTNET] = /*#__PURE__*/new Token(ChainId.BSCTESTNET, '0xaE8E19eFB41e7b96815649A6a60785e1fbA84C1e', 18, 'WBNB', 'Wrapped BNB'), _WETH[ChainId.MATICMAINNET] = /*#__PURE__*/new Token(ChainId.MATICMAINNET, '0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270', 18, 'WMATIC', 'Wrapped Matic'), _WETH[ChainId.AVALANCHE] = /*#__PURE__*/new Token(ChainId.AVALANCHE, '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7', 18, 'WAVAX', 'Wrapped Avax'), _WETH);
+var WETH = (_WETH = {}, _WETH[ChainId.MAINNET] = /*#__PURE__*/new Token(ChainId.MAINNET, '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2', 18, 'WETH', 'Wrapped Ether'), _WETH[ChainId.ROPSTEN] = /*#__PURE__*/new Token(ChainId.ROPSTEN, '0xc778417E063141139Fce010982780140Aa0cD5Ab', 18, 'WETH', 'Wrapped Ether'), _WETH[ChainId.RINKEBY] = /*#__PURE__*/new Token(ChainId.RINKEBY, '0xc778417E063141139Fce010982780140Aa0cD5Ab', 18, 'WETH', 'Wrapped Ether'), _WETH[ChainId.GÖRLI] = /*#__PURE__*/new Token(ChainId.GÖRLI, '0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6', 18, 'WETH', 'Wrapped Ether'), _WETH[ChainId.KOVAN] = /*#__PURE__*/new Token(ChainId.KOVAN, '0xd0A1E359811322d97991E03f863a0C30C2cF029C', 18, 'WETH', 'Wrapped Ether'), _WETH[ChainId.BSCMAINNET] = /*#__PURE__*/new Token(ChainId.BSCMAINNET, '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c', 18, 'WBNB', 'Wrapped BNB'), _WETH[ChainId.BSCTESTNET] = /*#__PURE__*/new Token(ChainId.BSCTESTNET, '0xaE8E19eFB41e7b96815649A6a60785e1fbA84C1e', 18, 'WBNB', 'Wrapped BNB'), _WETH[ChainId.MATICMAINNET] = /*#__PURE__*/new Token(ChainId.MATICMAINNET, '0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270', 18, 'WMATIC', 'Wrapped Matic'), _WETH[ChainId.AVALANCHE] = /*#__PURE__*/new Token(ChainId.AVALANCHE, '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7', 18, 'WAVAX', 'Wrapped Avax'), _WETH[ChainId.FANTOM] = /*#__PURE__*/new Token(ChainId.FANTOM, '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', 18, 'WFTM', 'Wrapped Fantom'), _WETH[ChainId.CELO] = /*#__PURE__*/new Token(ChainId.CELO, '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', 18, 'CELO', 'Celo'), _WETH[ChainId.ARBITRUM] = /*#__PURE__*/new Token(ChainId.ARBITRUM, '0x82af49447d8a07e3bd95bd0d56f35241523fbab1', 18, 'WETH', 'Wrapped Ether'), _WETH);
 
 var _toSignificantRoundin, _toFixedRounding;
 var Decimal = /*#__PURE__*/toFormat(_Decimal);
@@ -1679,5 +1717,5 @@ var Fetcher = /*#__PURE__*/function () {
   return Fetcher;
 }();
 
-export { ChainId, Currency, CurrencyAmount, FACTORY_ADDRESS, FACTORY_ADDRESS_BSC, Fetcher, Fraction, GET_ETHER, GET_FACTORY_ADDRESS, GET_INIT_CODE_HASH, INIT_CODE_HASH, INIT_CODE_HASH_BSC, InsufficientInputAmountError, InsufficientReservesError, MINIMUM_LIQUIDITY, Pair, Percent, Price, Rounding, Route, Router, Token, TokenAmount, Trade, TradeType, WETH, currencyEquals, inputOutputComparator, isAVAX, isBSC, isMATIC, tradeComparator };
+export { ChainId, Currency, CurrencyAmount, FACTORY_ADDRESS, FACTORY_ADDRESS_BSC, Fetcher, Fraction, GET_ETHER, GET_FACTORY_ADDRESS, GET_INIT_CODE_HASH, INIT_CODE_HASH, INIT_CODE_HASH_BSC, InsufficientInputAmountError, InsufficientReservesError, MINIMUM_LIQUIDITY, Pair, Percent, Price, Rounding, Route, Router, Token, TokenAmount, Trade, TradeType, WETH, currencyEquals, inputOutputComparator, isAVAX, isArbitrum, isBSC, isCelo, isFantom, isMATIC, tradeComparator };
 //# sourceMappingURL=sdk.esm.js.map

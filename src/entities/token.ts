@@ -108,4 +108,25 @@ export const WETH = {
     'WAVAX',
     'Wrapped Avax'
   ),
+  [ChainId.FANTOM]: new Token(
+    ChainId.FANTOM,
+    '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83',
+    18,
+    'WFTM',
+    'Wrapped Fantom'
+  ),
+  [ChainId.CELO]: new Token(
+    ChainId.CELO,
+    '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83',
+    18,
+    'CELO',
+    'Celo'
+  ),
+  [ChainId.ARBITRUM]: new Token(
+    ChainId.ARBITRUM,
+    '0x82af49447d8a07e3bd95bd0d56f35241523fbab1',
+    18,
+    'WETH',
+    'Wrapped Ether'
+  ),
 }

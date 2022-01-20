@@ -12,9 +12,12 @@ export enum ChainId {
   BSCMAINNET = 56,
   BSCTESTNET = 97,
   MATICMAINNET = 137,  
+  FANTOM = 250,
   // Comment this for now
   // FUJI = 43113,
-  AVALANCHE = 43114
+  AVALANCHE = 43114,
+  CELO = 42220,
+  ARBITRUM = 42161
 }
 
 export enum TradeType {
@@ -56,6 +59,35 @@ export const isAVAX = (chainId: ChainId): boolean => {
       return false
   }
 }
+
+export const isFantom = (chainId: ChainId): boolean => {
+  switch (chainId) {
+    case ChainId.FANTOM:
+      return true;
+    default:
+      return false
+  }
+}
+
+export const isCelo = (chainId: ChainId): boolean => {
+  switch (chainId) {
+    case ChainId.CELO:
+      return true;
+    default:
+      return false
+  }
+}
+
+
+export const isArbitrum = (chainId: ChainId): boolean => {
+  switch (chainId) {
+    case ChainId.ARBITRUM:
+      return true;
+    default:
+      return false
+  }
+}
+
 
 export const FACTORY_ADDRESS = '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f'
 // Pancakeswap v2
