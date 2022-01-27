@@ -14,9 +14,9 @@ export {
   isBSC,
   isMATIC,
   isAVAX,
-  isArbitrum,
-  isCelo,
-  isFantom,
+  isARBITRUM,
+  isCELO,
+  isFANTOM,
   GET_FACTORY_ADDRESS,
   GET_INIT_CODE_HASH,
 } from './constants'

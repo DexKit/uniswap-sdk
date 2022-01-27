@@ -17,7 +17,8 @@ export enum ChainId {
   // FUJI = 43113,
   AVALANCHE = 43114,
   CELO = 42220,
-  ARBITRUM = 42161
+  ARBITRUM = 42161,
+  OPTIMISM = 10
 }
 
 export enum TradeType {
@@ -60,7 +61,7 @@ export const isAVAX = (chainId: ChainId): boolean => {
   }
 }
 
-export const isFantom = (chainId: ChainId): boolean => {
+export const isFANTOM = (chainId: ChainId): boolean => {
   switch (chainId) {
     case ChainId.FANTOM:
       return true;
@@ -69,7 +70,7 @@ export const isFantom = (chainId: ChainId): boolean => {
   }
 }
 
-export const isCelo = (chainId: ChainId): boolean => {
+export const isCELO = (chainId: ChainId): boolean => {
   switch (chainId) {
     case ChainId.CELO:
       return true;
@@ -79,9 +80,18 @@ export const isCelo = (chainId: ChainId): boolean => {
 }
 
 
-export const isArbitrum = (chainId: ChainId): boolean => {
+export const isARBITRUM = (chainId: ChainId): boolean => {
   switch (chainId) {
     case ChainId.ARBITRUM:
+      return true;
+    default:
+      return false
+  }
+}
+
+export const isOPTIMISM = (chainId: ChainId): boolean => {
+  switch (chainId) {
+    case ChainId.OPTIMISM:
       return true;
     default:
       return false

@@ -30,6 +30,7 @@ var ChainId;
   ChainId[ChainId["AVALANCHE"] = 43114] = "AVALANCHE";
   ChainId[ChainId["CELO"] = 42220] = "CELO";
   ChainId[ChainId["ARBITRUM"] = 42161] = "ARBITRUM";
+  ChainId[ChainId["OPTIMISM"] = 10] = "OPTIMISM";
 })(ChainId || (ChainId = {}));
 
 var TradeType;
@@ -77,7 +78,7 @@ var isAVAX = function isAVAX(chainId) {
       return false;
   }
 };
-var isFantom = function isFantom(chainId) {
+var isFANTOM = function isFANTOM(chainId) {
   switch (chainId) {
     case ChainId.FANTOM:
       return true;
@@ -86,7 +87,7 @@ var isFantom = function isFantom(chainId) {
       return false;
   }
 };
-var isCelo = function isCelo(chainId) {
+var isCELO = function isCELO(chainId) {
   switch (chainId) {
     case ChainId.CELO:
       return true;
@@ -95,9 +96,18 @@ var isCelo = function isCelo(chainId) {
       return false;
   }
 };
-var isArbitrum = function isArbitrum(chainId) {
+var isARBITRUM = function isARBITRUM(chainId) {
   switch (chainId) {
     case ChainId.ARBITRUM:
+      return true;
+
+    default:
+      return false;
+  }
+};
+var isOPTIMISM = function isOPTIMISM(chainId) {
+  switch (chainId) {
+    case ChainId.OPTIMISM:
       return true;
 
     default:
@@ -499,11 +509,15 @@ var Currency = /*#__PURE__*/function () {
       return new Currency(18, 'AVAX', 'Avalanche');
     }
 
-    if (isFantom(chainId)) {
+    if (isFANTOM(chainId)) {
       return new Currency(18, 'FTM', 'Fantom');
     }
 
-    if (isArbitrum(chainId)) {
+    if (isARBITRUM(chainId)) {
+      return new Currency(18, 'ETH', 'Ether');
+    }
+
+    if (isOPTIMISM(chainId)) {
       return new Currency(18, 'ETH', 'Ether');
     }
 
@@ -1717,5 +1731,5 @@ var Fetcher = /*#__PURE__*/function () {
   return Fetcher;
 }();
 
-export { ChainId, Currency, CurrencyAmount, FACTORY_ADDRESS, FACTORY_ADDRESS_BSC, Fetcher, Fraction, GET_ETHER, GET_FACTORY_ADDRESS, GET_INIT_CODE_HASH, INIT_CODE_HASH, INIT_CODE_HASH_BSC, InsufficientInputAmountError, InsufficientReservesError, MINIMUM_LIQUIDITY, Pair, Percent, Price, Rounding, Route, Router, Token, TokenAmount, Trade, TradeType, WETH, currencyEquals, inputOutputComparator, isAVAX, isArbitrum, isBSC, isCelo, isFantom, isMATIC, tradeComparator };
+export { ChainId, Currency, CurrencyAmount, FACTORY_ADDRESS, FACTORY_ADDRESS_BSC, Fetcher, Fraction, GET_ETHER, GET_FACTORY_ADDRESS, GET_INIT_CODE_HASH, INIT_CODE_HASH, INIT_CODE_HASH_BSC, InsufficientInputAmountError, InsufficientReservesError, MINIMUM_LIQUIDITY, Pair, Percent, Price, Rounding, Route, Router, Token, TokenAmount, Trade, TradeType, WETH, currencyEquals, inputOutputComparator, isARBITRUM, isAVAX, isBSC, isCELO, isFANTOM, isMATIC, tradeComparator };
 //# sourceMappingURL=sdk.esm.js.map

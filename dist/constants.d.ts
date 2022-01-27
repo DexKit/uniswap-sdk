@@ -12,7 +12,8 @@ export declare enum ChainId {
     FANTOM = 250,
     AVALANCHE = 43114,
     CELO = 42220,
-    ARBITRUM = 42161
+    ARBITRUM = 42161,
+    OPTIMISM = 10
 }
 export declare enum TradeType {
     EXACT_INPUT = 0,
@@ -26,9 +27,10 @@ export declare enum Rounding {
 export declare const isBSC: (chainId: ChainId) => boolean;
 export declare const isMATIC: (chainId: ChainId) => boolean;
 export declare const isAVAX: (chainId: ChainId) => boolean;
-export declare const isFantom: (chainId: ChainId) => boolean;
-export declare const isCelo: (chainId: ChainId) => boolean;
-export declare const isArbitrum: (chainId: ChainId) => boolean;
+export declare const isFANTOM: (chainId: ChainId) => boolean;
+export declare const isCELO: (chainId: ChainId) => boolean;
+export declare const isARBITRUM: (chainId: ChainId) => boolean;
+export declare const isOPTIMISM: (chainId: ChainId) => boolean;
 export declare const FACTORY_ADDRESS = "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f";
 export declare const FACTORY_ADDRESS_BSC = "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73";
 export declare const FACTORY_ADDRESS_MATIC = "0x5757371414417b8C6CAad45bAeF941aBc7d3Ab32";

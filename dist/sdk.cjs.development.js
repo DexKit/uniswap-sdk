@@ -34,6 +34,7 @@ var _FACTORY_ADDRESS_AVAX, _SOLIDITY_TYPE_MAXIMA;
   ChainId[ChainId["AVALANCHE"] = 43114] = "AVALANCHE";
   ChainId[ChainId["CELO"] = 42220] = "CELO";
   ChainId[ChainId["ARBITRUM"] = 42161] = "ARBITRUM";
+  ChainId[ChainId["OPTIMISM"] = 10] = "OPTIMISM";
 })(exports.ChainId || (exports.ChainId = {}));
 
 (function (TradeType) {
@@ -77,7 +78,7 @@ var isAVAX = function isAVAX(chainId) {
       return false;
   }
 };
-var isFantom = function isFantom(chainId) {
+var isFANTOM = function isFANTOM(chainId) {
   switch (chainId) {
     case exports.ChainId.FANTOM:
       return true;
@@ -86,7 +87,7 @@ var isFantom = function isFantom(chainId) {
       return false;
   }
 };
-var isCelo = function isCelo(chainId) {
+var isCELO = function isCELO(chainId) {
   switch (chainId) {
     case exports.ChainId.CELO:
       return true;
@@ -95,9 +96,18 @@ var isCelo = function isCelo(chainId) {
       return false;
   }
 };
-var isArbitrum = function isArbitrum(chainId) {
+var isARBITRUM = function isARBITRUM(chainId) {
   switch (chainId) {
     case exports.ChainId.ARBITRUM:
+      return true;
+
+    default:
+      return false;
+  }
+};
+var isOPTIMISM = function isOPTIMISM(chainId) {
+  switch (chainId) {
+    case exports.ChainId.OPTIMISM:
       return true;
 
     default:
@@ -499,11 +509,15 @@ var Currency = /*#__PURE__*/function () {
       return new Currency(18, 'AVAX', 'Avalanche');
     }
 
-    if (isFantom(chainId)) {
+    if (isFANTOM(chainId)) {
       return new Currency(18, 'FTM', 'Fantom');
     }
 
-    if (isArbitrum(chainId)) {
+    if (isARBITRUM(chainId)) {
+      return new Currency(18, 'ETH', 'Ether');
+    }
+
+    if (isOPTIMISM(chainId)) {
       return new Currency(18, 'ETH', 'Ether');
     }
 
@@ -1743,11 +1757,11 @@ exports.Trade = Trade;
 exports.WETH = WETH;
 exports.currencyEquals = currencyEquals;
 exports.inputOutputComparator = inputOutputComparator;
+exports.isARBITRUM = isARBITRUM;
 exports.isAVAX = isAVAX;
-exports.isArbitrum = isArbitrum;
 exports.isBSC = isBSC;
-exports.isCelo = isCelo;
-exports.isFantom = isFantom;
+exports.isCELO = isCELO;
+exports.isFANTOM = isFANTOM;
 exports.isMATIC = isMATIC;
 exports.tradeComparator = tradeComparator;
 //# sourceMappingURL=sdk.cjs.development.js.map
