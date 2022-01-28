@@ -129,4 +129,11 @@ export const WETH = {
     'WETH',
     'Wrapped Ether'
   ),
+  [ChainId.OPTIMISM]: new Token(
+    ChainId.OPTIMISM,
+    '0x4200000000000000000000000000000000000006',
+    18,
+    'WETH',
+    'Wrapped Ether'
+  ),
 }
