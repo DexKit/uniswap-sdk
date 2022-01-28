@@ -1763,5 +1763,6 @@ exports.isBSC = isBSC;
 exports.isCELO = isCELO;
 exports.isFANTOM = isFANTOM;
 exports.isMATIC = isMATIC;
+exports.isOPTIMISM = isOPTIMISM;
 exports.tradeComparator = tradeComparator;
 //# sourceMappingURL=sdk.cjs.development.js.map

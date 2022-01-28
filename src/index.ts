@@ -15,6 +15,7 @@ export {
   isMATIC,
   isAVAX,
   isARBITRUM,
+  isOPTIMISM,
   isCELO,
   isFANTOM,
   GET_FACTORY_ADDRESS,

@@ -1731,5 +1731,5 @@ var Fetcher = /*#__PURE__*/function () {
   return Fetcher;
 }();
 
-export { ChainId, Currency, CurrencyAmount, FACTORY_ADDRESS, FACTORY_ADDRESS_BSC, Fetcher, Fraction, GET_ETHER, GET_FACTORY_ADDRESS, GET_INIT_CODE_HASH, INIT_CODE_HASH, INIT_CODE_HASH_BSC, InsufficientInputAmountError, InsufficientReservesError, MINIMUM_LIQUIDITY, Pair, Percent, Price, Rounding, Route, Router, Token, TokenAmount, Trade, TradeType, WETH, currencyEquals, inputOutputComparator, isARBITRUM, isAVAX, isBSC, isCELO, isFANTOM, isMATIC, tradeComparator };
+export { ChainId, Currency, CurrencyAmount, FACTORY_ADDRESS, FACTORY_ADDRESS_BSC, Fetcher, Fraction, GET_ETHER, GET_FACTORY_ADDRESS, GET_INIT_CODE_HASH, INIT_CODE_HASH, INIT_CODE_HASH_BSC, InsufficientInputAmountError, InsufficientReservesError, MINIMUM_LIQUIDITY, Pair, Percent, Price, Rounding, Route, Router, Token, TokenAmount, Trade, TradeType, WETH, currencyEquals, inputOutputComparator, isARBITRUM, isAVAX, isBSC, isCELO, isFANTOM, isMATIC, isOPTIMISM, tradeComparator };
 //# sourceMappingURL=sdk.esm.js.map
